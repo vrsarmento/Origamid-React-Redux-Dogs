@@ -60,7 +60,7 @@ export const UserStorage = ({ children }) => {
 
       const { url, options } = TOKEN_POST({ username, password })
       const tokenRes = await fetch(url, options)
-      console.log(tokenRes)
+
       if (!tokenRes.ok)
         throw new Error(
           `Erro: ${tokenRes.statusText} Usuário e/ou senha inválidos.`

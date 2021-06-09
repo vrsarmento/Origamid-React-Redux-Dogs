@@ -36,9 +36,11 @@ const LoginForm = () => {
         )}
         <Error error={error} />
       </form>
+
       <Link className={styles.lost} to='/login/perdeu'>
         Perdeu a senha?
       </Link>
+
       <div className={styles.signup}>
         <h2 className={styles.subtitle}>Cadastre-se</h2>
         <p>Ainda não possui conta? Cadastre-se no site.</p>

@@ -7,6 +7,7 @@ import { UserContext } from '../../Contexts/UserContext'
 import Error from '../Helpers/Error'
 import styles from './LoginForm.module.css'
 import stylesBtn from '../Forms/Button.module.css'
+import Head from '../Helpers/Head'
 
 const LoginForm = () => {
   const username = useForm()
@@ -24,6 +25,8 @@ const LoginForm = () => {
 
   return (
     <section className='animeLeft'>
+      <Head title='Login' description='Página de login do site Dogs.' />
+
       <h1 className='title'>Login</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <Input type='text' label='Usuário' name='username' {...username} />

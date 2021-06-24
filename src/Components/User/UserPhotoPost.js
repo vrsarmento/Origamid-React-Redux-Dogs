@@ -7,6 +7,7 @@ import useFetch from '../../Hooks/useFetch'
 import Error from '../Helpers/Error'
 import { PHOTO_POST } from '../../api'
 import styles from './UserPhotoPost.module.css'
+import Head from '../Helpers/Head'
 
 const UserPhotoPost = () => {
   const nome = useForm()
@@ -42,6 +43,10 @@ const UserPhotoPost = () => {
 
   return (
     <section className={`${styles.photoPost} animeLeft`}>
+      <Head
+        title='Poste sua foto'
+        description='Página para postagem de foto do site Dogs.'
+      />
       <form onSubmit={handleSubmit}>
         <Input label='Nome' type='text' name='name' {...nome} />
         <Input label='Peso' type='number' name='weight' {...peso} />

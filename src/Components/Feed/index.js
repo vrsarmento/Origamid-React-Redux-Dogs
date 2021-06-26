@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FeedModal from './FeedModal'
 import FeedPhotos from './FeedPhotos'
+import styles from './Feed.module.css'
 
 const Feed = ({ user }) => {
   const [modalPhoto, setModalPhoto] = React.useState(null)
@@ -51,6 +52,10 @@ const Feed = ({ user }) => {
           setInfinite={setInfinite}
         />
       ))}
+
+      {!infinite && !user && (
+        <p className={styles.noMorePosts}>Não existem mais postagens.</p>
+      )}
     </div>
   )
 }

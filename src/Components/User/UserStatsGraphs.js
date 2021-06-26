@@ -40,7 +40,7 @@ const UserStatsGraphs = ({ data }) => {
               strokeWidth: 2
             },
             labels: {
-              fontSize: 9,
+              fontSize: 12,
               fill: '#333'
             }
           }}
@@ -49,7 +49,21 @@ const UserStatsGraphs = ({ data }) => {
 
       <div className={styles.graphItem}>
         <VictoryChart>
-          <VictoryBar alignment='start' data={graph}></VictoryBar>
+          <VictoryBar
+            alignment='start'
+            data={graph}
+            style={{
+              data: {
+                fillOpacity: 0.9,
+                stroke: '#fff',
+                strokeWidth: 2
+              },
+              labels: {
+                fontSize: 12,
+                fill: '#333'
+              }
+            }}
+          ></VictoryBar>
         </VictoryChart>
       </div>
     </section>

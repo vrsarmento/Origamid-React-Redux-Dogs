@@ -38,7 +38,7 @@
 
 .single .img {
   grid-row: 1;
-  border-radius: .4rem;
+  border-radius: 0.4rem;
   overflow: hidden;
 }
 

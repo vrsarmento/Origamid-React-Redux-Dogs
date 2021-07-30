@@ -1,20 +1,21 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { PHOTO_GET_WITH_CACHE } from '../../api'
-import useFetch from '../../Hooks/useFetch'
 import Error from '../Helpers/Error'
 import Loading from '../Helpers/Loading'
 import PhotoContent from './PhotoContent'
 import Head from '../Helpers/Head'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchPhoto } from '../../store/photo'
 
 const Photo = () => {
   const { id } = useParams()
-  const { data, loading, error, request } = useFetch()
+  const { loading, error, data } = useSelector((state) => state.photo)
+
+  const dispatch = useDispatch()
 
   React.useEffect(() => {
-    const { url } = PHOTO_GET_WITH_CACHE(id)
-    request(url)
-  }, [request, id])
+    dispatch(fetchPhoto(id))
+  }, [dispatch, id])
 
   if (error) return <Error error={error} />
   if (loading) return <Loading />
@@ -25,7 +26,7 @@ const Photo = () => {
           title={data.photo.title}
           description={`Página com a foto ${data.photo.title} no site Dogs.`}
         />
-        <PhotoContent data={data} single={true} />
+        <PhotoContent single={true} />
       </section>
     )
   else return null

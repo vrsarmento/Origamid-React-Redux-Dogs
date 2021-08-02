@@ -7,10 +7,12 @@ import LoginPasswordLost from './LoginPasswordLost'
 import LoginPasswordReset from './LoginPasswordReset'
 import styles from './Login.module.css'
 import NotFound from '../NotFound'
+import Loading from '../Helpers/Loading'
 
 const Login = () => {
-  const { data } = useSelector((state) => state.user)
+  const { data, loading } = useSelector((state) => state.user)
 
+  if (loading) return <Loading />
   if (data) return <Navigate to='/conta' />
 
   return (

@@ -1,25 +1,31 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import useForm from '../../Hooks/useForm'
 import Button from '../Forms/Button'
 import Input from '../Forms/Input'
-import { UserContext } from '../../Contexts/UserContext'
 import Error from '../Helpers/Error'
 import styles from './LoginForm.module.css'
 import stylesBtn from '../Forms/Button.module.css'
 import Head from '../Helpers/Head'
+import { userLogin } from '../../store/user'
 
 const LoginForm = () => {
   const username = useForm()
   const password = useForm()
 
-  const { userLogin, error, loading } = React.useContext(UserContext)
+  const dispatch = useDispatch()
+  const { token, user } = useSelector((state) => state)
+  const loading = token.loading || user.loading
+  const error = token.error || user.error
 
   async function handleSubmit(e) {
     e.preventDefault()
 
     if (username.validate() && password.validate()) {
-      userLogin(username.value, password.value)
+      dispatch(
+        userLogin({ username: username.value, password: password.value })
+      )
     }
   }
 

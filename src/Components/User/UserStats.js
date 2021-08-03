@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import Head from '../Helpers/Head'
 import Loading from '../Helpers/Loading'
 import Error from '../Helpers/Error'
@@ -9,16 +10,15 @@ const UserStatsGraphs = React.lazy(() => import('./UserStatsGraphs'))
 
 const UserStats = () => {
   const { data, error, loading, request } = useFetch()
+  const { token } = useSelector((state) => state.token.data)
 
   React.useEffect(() => {
-    const token = window.localStorage.getItem('Dogs_Token')
-
     async function getData() {
       const { url, options } = STATS_GET(token)
       await request(url, options)
     }
     getData()
-  }, [request])
+  }, [request, token])
 
   if (loading) return <Loading />
   if (error) return <Error error={error} />

@@ -1,11 +1,12 @@
 import React from 'react'
 import { PHOTO_DELETE } from '../../api'
+import { config } from '../../config'
 import useFetch from '../../Hooks/useFetch'
 import styles from './PhotoDelete.module.css'
 
 const PhotoDelete = ({ id }) => {
   const { loading, request } = useFetch()
-  const token = window.localStorage.getItem('Dogs_Token')
+  const token = window.localStorage.getItem(config.LOCALSTORAGE_TOKEN_KEY_ID)
 
   async function handleClick() {
     const confirm = window.confirm('Tem certeza que deseja apagar a foto?')

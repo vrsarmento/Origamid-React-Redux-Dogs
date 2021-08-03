@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { COMMENT_POST } from '../../api'
 import useFetch from '../../Hooks/useFetch'
 import Error from '../Helpers/Error'
@@ -8,7 +9,7 @@ import styles from './PhotoCommentsForm.module.css'
 const PhotoCommentsForm = ({ id, setComments, single }) => {
   const [comment, setComment] = React.useState('')
   const { request, error } = useFetch()
-  const token = window.localStorage.getItem('Dogs_Token')
+  const { token } = useSelector((state) => state.token.data)
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -21,7 +22,10 @@ const PhotoCommentsForm = ({ id, setComments, single }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`${styles.form} ${single ? styles.single : ''}`}>
+    <form
+      onSubmit={handleSubmit}
+      className={`${styles.form} ${single ? styles.single : ''}`}
+    >
       <textarea
         className={styles.textarea}
         id='comment'

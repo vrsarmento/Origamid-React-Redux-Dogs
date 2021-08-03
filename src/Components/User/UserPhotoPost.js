@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Input from '../Forms/Input'
 import Button from '../Forms/Button'
@@ -16,6 +17,7 @@ const UserPhotoPost = () => {
   const [img, setImg] = React.useState({})
   const { data, error, loading, request } = useFetch()
   const navigate = useNavigate()
+  const { token } = useSelector((state) => state.token.data)
 
   React.useEffect(() => {
     if (data) navigate('/conta')
@@ -29,7 +31,6 @@ const UserPhotoPost = () => {
     formData.append('peso', peso.value)
     formData.append('idade', idade.value)
 
-    const token = window.localStorage.getItem('Dogs_Token')
     const { url, options } = PHOTO_POST(formData, token)
     request(url, options)
   }

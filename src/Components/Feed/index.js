@@ -7,8 +7,9 @@ import styles from './Feed.module.css'
 import { loadNewPhotos, resetFeedState } from '../../store/feed'
 import Loading from '../Helpers/Loading'
 import Error from '../Helpers/Error'
+import { config } from '../../config'
 
-const Feed = ({ user }) => {
+const Feed = ({ user, photosPerPage }) => {
   const [modalPhoto, setModalPhoto] = React.useState(null)
   const { infinite, loading, list, error } = useSelector((state) => state.feed)
 
@@ -16,8 +17,8 @@ const Feed = ({ user }) => {
 
   React.useEffect(() => {
     dispatch(resetFeedState())
-    dispatch(loadNewPhotos({ user }))
-  }, [dispatch, user])
+    dispatch(loadNewPhotos({ user, total: photosPerPage }))
+  }, [dispatch, user, photosPerPage])
 
   React.useEffect(() => {
     let wait = false
@@ -28,7 +29,7 @@ const Feed = ({ user }) => {
         const height = document.body.offsetHeight - window.innerHeight
 
         if (scroll > height * 0.75 && !wait) {
-          dispatch(loadNewPhotos({ user }))
+          dispatch(loadNewPhotos({ user, total: photosPerPage }))
           wait = true
 
           setTimeout(() => {
@@ -45,7 +46,7 @@ const Feed = ({ user }) => {
       window.removeEventListener('wheel', infiniteScroll)
       window.removeEventListener('scroll', infiniteScroll)
     }
-  }, [infinite, dispatch, user])
+  }, [infinite, dispatch, user, photosPerPage])
 
   return (
     <div>
@@ -65,7 +66,8 @@ const Feed = ({ user }) => {
 }
 
 Feed.defaultProps = {
-  user: 0
+  user: 0,
+  photosPerPage: config.PHOTOS_PER_PAGE_DEFAULT
 }
 
 Feed.propTypes = {

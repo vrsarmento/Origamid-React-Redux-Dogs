@@ -1,5 +1,4 @@
 import { PHOTOS_GET } from '../api'
-import { config } from '../config'
 import createAsyncSlice from './helpers/createAsyncSlice'
 
 const slice = createAsyncSlice({
@@ -33,7 +32,7 @@ export const fetchFeed = slice.asyncAction
 export const { addPhotos, addPage, resetState: resetFeedState } = slice.actions
 
 export const loadNewPhotos =
-  ({ total = config.PHOTOS_PER_PAGE, user }) =>
+  ({ total, user }) =>
   async (dispatch, getState) => {
     const { feed } = getState()
     const { payload } = await dispatch(

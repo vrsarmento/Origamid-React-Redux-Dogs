@@ -7,6 +7,7 @@ import UserPhotoPost from './UserPhotoPost'
 import UserStats from './UserStats'
 import Head from '../Helpers/Head'
 import { useSelector } from 'react-redux'
+import { config } from '../../config'
 
 const User = () => {
   const { data } = useSelector((state) => state.user)
@@ -16,7 +17,12 @@ const User = () => {
       <Head title='Minha conta' description='Página do usuário no site Dogs.' />
       <UserHeader />
       <Routes>
-        <Route path='/' element={<Feed user={data.id} />} />
+        <Route
+          path='/'
+          element={
+            <Feed user={data.id} photosPerPage={config.PHOTOS_PER_PAGE_USER} />
+          }
+        />
         <Route path='/postar' element={<UserPhotoPost />} />
         <Route path='/estatisticas' element={<UserStats />} />
         <Route path='*' element={<NotFound />} />

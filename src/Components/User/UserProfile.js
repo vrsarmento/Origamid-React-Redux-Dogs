@@ -14,7 +14,7 @@ const UserProfile = () => {
         description={`Página do perfil do usuário ${user} no site Dogs.`}
       />
       <h1 className='title'>{user}</h1>
-      <Feed user={user} photosPerPage={config.PHOTOS_PER_PAGE_USER} />
+      <Feed user={user} photosPerPage={config.PHOTOS_PER_PAGE_HOME} />
     </section>
   )
 }

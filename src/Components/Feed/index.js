@@ -10,8 +10,8 @@ import Error from '../Helpers/Error'
 import { config } from '../../config'
 
 const Feed = ({ user, photosPerPage }) => {
-  const [modalPhoto, setModalPhoto] = React.useState(null)
   const { infinite, loading, list, error } = useSelector((state) => state.feed)
+  console.log('user: ', user, 'photosperPage: ', photosPerPage)
 
   const dispatch = useDispatch()
 
@@ -50,11 +50,9 @@ const Feed = ({ user, photosPerPage }) => {
 
   return (
     <div>
-      {modalPhoto && (
-        <FeedModal photo={modalPhoto} setModalPhoto={setModalPhoto} />
-      )}
+      <FeedModal />
 
-      {list.length > 0 && <FeedPhotos setModalPhoto={setModalPhoto} />}
+      {list.length > 0 && <FeedPhotos />}
       {loading && <Loading />}
       {error && <Error error={error} />}
 

@@ -11,8 +11,6 @@ import { config } from '../../config'
 
 const Feed = ({ user, photosPerPage }) => {
   const { infinite, loading, list, error } = useSelector((state) => state.feed)
-  console.log('user: ', user, 'photosperPage: ', photosPerPage)
-
   const dispatch = useDispatch()
 
   React.useEffect(() => {
